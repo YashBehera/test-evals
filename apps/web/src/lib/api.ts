@@ -1,7 +1,8 @@
 import { env } from "@test-evals/env/web";
 
 export async function apiFetch<T>(path: string, options?: RequestInit): Promise<T> {
-  const response = await fetch(`${env.NEXT_PUBLIC_SERVER_URL}${path}`, {
+  const baseUrl = env.NEXT_PUBLIC_SERVER_URL.replace(/\/$/, "");
+  const response = await fetch(`${baseUrl}${path}`, {
     ...options,
     credentials: "include",
     headers: {
