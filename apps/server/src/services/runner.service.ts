@@ -117,9 +117,13 @@ async function withRateLimitBackoff<T>(fn: () => Promise<T>) {
 }
 
 function resolveDataPath(...segments: string[]) {
-  // Use file-relative path to be robust across different CWDs
-  // src/services/runner.service.ts -> ../../../../data
-  return path.resolve(import.meta.dir, "../../../../data", ...segments);
+  // Bundled: apps/server/dist/index.mjs -> ../../../data
+  // Source: apps/server/src/services/runner.service.ts -> ../../../../data
+  const isBundle = import.meta.dir.endsWith("/dist") || import.meta.dir.includes("/dist/");
+  const relativePath = isBundle ? "../../../data" : "../../../../data";
+  
+  const resolved = path.resolve(import.meta.dir, relativePath, ...segments);
+  return resolved;
 }
 
 async function loadCases(filter?: DatasetFilter): Promise<CaseData[]> {
