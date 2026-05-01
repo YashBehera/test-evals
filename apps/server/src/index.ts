@@ -263,4 +263,10 @@ app.get("/", (c) => {
   return c.text("OK");
 });
 
-export default app;
+const port = Number(process.env.PORT || 8787);
+console.log(`Server is running on port ${port}`);
+
+export default {
+  port,
+  fetch: app.fetch,
+};

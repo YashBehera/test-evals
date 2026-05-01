@@ -26,6 +26,26 @@ Supported flags:
 
 ---
 
+## Deployment Instructions
+
+### 1. Backend (Railway)
+I have included a `railway.json` and `Procfile` in `apps/server` for seamless deployment.
+- **Root Directory**: Set to `apps/server` in Railway service settings.
+- **Build Command**: `cd ../.. && bun install && bun x turbo run build --filter=server`
+- **Start Command**: `bun run dist/index.mjs`
+- **Environment Variables**:
+  - `PORT`: 8787 (or your preferred port)
+  - `DATABASE_URL`: Your Postgres connection string.
+  - `ANTHROPIC_API_KEY`: Your API key.
+
+### 2. Frontend (Vercel)
+- **Root Directory**: `apps/web`
+- **Build Command**: `cd ../.. && bun install && bun x turbo run build --filter=web`
+- **Output Directory**: `.next`
+- **Environment Variables**:
+  - `NEXT_PUBLIC_API_URL`: Your deployed Railway URL.
+  - `BETTER_AUTH_URL`: Your Vercel deployment URL.
+
 ## Evaluation Results (3-Strategy Run)
 
 > [!NOTE]
