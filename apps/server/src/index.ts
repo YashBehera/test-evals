@@ -33,7 +33,17 @@ app.use(logger());
 app.use(
   "/*",
   cors({
-    origin: env.CORS_ORIGIN,
+    origin: (origin) => {
+      if (!origin) return env.CORS_ORIGIN;
+      if (
+        origin.endsWith("localhost:3001") ||
+        origin === env.CORS_ORIGIN ||
+        origin.endsWith(".vercel.app")
+      ) {
+        return origin;
+      }
+      return env.CORS_ORIGIN;
+    },
     allowMethods: ["GET", "POST", "OPTIONS"],
     allowHeaders: ["Content-Type", "Authorization"],
     credentials: true,
