@@ -17,6 +17,12 @@
       "cache": false,
       "persistent": true
     },
+    "extract": {
+      "cache": false
+    },
+    "evaluate": {
+      "cache": false
+    },
     "db:push": {
       "cache": false
     },

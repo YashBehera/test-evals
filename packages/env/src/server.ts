@@ -4,6 +4,8 @@ import { z } from "zod";
 
 export const env = createEnv({
   server: {
+    ANTHROPIC_API_KEY: z.string().min(1).optional(),
+    MOCK_LLM: z.enum(["true", "false"]).default("false"),
     DATABASE_URL: z.string().min(1),
     BETTER_AUTH_SECRET: z.string().min(32),
     BETTER_AUTH_URL: z.url(),
